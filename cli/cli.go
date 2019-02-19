@@ -41,8 +41,8 @@ func getFullArg(args []string, start int, length int) (string, string) {
 // call the main package with the given commands
 func runPackage(commands []*Command) error {
 	args := convertCommands(commands)
-	hello.Hello(args)
-	return nil
+	err := hello.Hello(args)
+	return err
 }
 
 func usage(commands []*Command) (usageString string) {

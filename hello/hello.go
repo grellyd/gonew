@@ -12,7 +12,7 @@ var debug bool
 var interactive bool
 
 // Hello says Hi
-func Hello(args []string) {
+func Hello(args []string) error {
 	interactive, _ = strconv.ParseBool(args[0])
 	debug, _ = strconv.ParseBool(args[1])
 	if debug {
@@ -28,6 +28,7 @@ func Hello(args []string) {
 	if interactive {
 		interaction(args[2])
 	}
+	return nil
 }
 
 func interaction(server string) {
