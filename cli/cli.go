@@ -52,10 +52,12 @@ func usage(commands []*Command) (usageString string){
 	builder.WriteString("\n")
 	builder.WriteString(breakLine)
 	builder.WriteString("\n")
-	fmt.Fprintf(&builder, "Usage: %s [options]\n", usageCommand)
+	builder.WriteString(programDescription)
+	builder.WriteString("\n\n")
+	fmt.Fprintf(&builder, "Usage: %s [options]\n\n", usageCommand)
 	fmt.Fprint(&builder, "Valid options:\n\n")
 	for _, cmd := range(commands) {
-		fmt.Fprintf(&builder, "%s/%s: %s\n", cmd.long, cmd.short, cmd.description)
+		fmt.Fprintf(&builder, "%s/%s: %s\n", cmd.short, cmd.long, cmd.description)
 	}
 	return builder.String()
 }

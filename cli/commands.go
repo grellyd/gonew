@@ -7,7 +7,8 @@ import (
 const (
 	breakLine = "===================="
 	programName = "goNew"
-	usageCommand = "go run goNew.go"
+	usageCommand = "go run main.go"
+	programDescription = "go CLI example Program"
 
 )
 
