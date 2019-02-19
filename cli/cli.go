@@ -13,14 +13,15 @@ import (
 func Run() (code int) {
 	commands := ValidCommands()
 	args := os.Args[1:]
-	for _, arg := range args {
+	for i := 0; i < len(args); i++ {
 		for _, cmd := range commands {
+			arg := getFullArg(args, i, cmd.length)
 			if cmd.regex.MatchString(arg) {
-				cmd.present = true
 				if cmd.short == "-h" {
 					fmt.Println(usage(commands))
 					return code
 				}
+				cmd.present = true
 			}
 		}
 	}
@@ -35,6 +36,13 @@ func Run() (code int) {
 		code = 1
 	}
 	return code
+}
+
+func getFullArg(args []string, start int, length int) string {
+	if length == 1 || len(args) < (start+length) {
+		return args[start]
+	}
+	return strings.Join(args[start:start + length], " ")
 }
 
 // call the main package with the given commands
@@ -63,5 +71,11 @@ func usage(commands []*Command) (usageString string){
 }
 
 func convertCommands(commands []*Command) (args []string) {
+	args = make([]string, len(commands))
+	for _, cmd := range commands {
+		if cmd.present {
+			args[cmd.order] = "true"
+		}
+	}
 	return args
 }

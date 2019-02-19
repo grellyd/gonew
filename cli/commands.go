@@ -19,12 +19,24 @@ type Command struct {
 	short string
 	description string
 	regex regexp.Regexp
+	length int
 	present bool
 }
 
 // ValidCommands to this program
 func ValidCommands() (commands []*Command) {
-	return []*Command {debug(), interactive(), help()}
+	return []*Command {debug(), interactive(), help(), server()}
+}
+
+func server() *Command {
+	return &Command{
+		order: 2,
+		long: "--server",
+		short: "-s",
+		description: "Server IP and port",
+		regex: *regexp.MustCompile("(-s|--server) ([0-9]{1,3}.?){4}:[0-9]{1,5}"),
+		length: 2,
+	}
 }
 
 func interactive() *Command {
@@ -34,6 +46,7 @@ func interactive() *Command {
 		short: "-i",
 		description: "Run the program in interactive mode",
 		regex: *regexp.MustCompile("-i|--interactive"),
+		length: 1,
 	}
 }
 
@@ -44,6 +57,7 @@ func debug() *Command {
 		short: "-d",
 		description: "Run the program in debug mode, with extra logging",
 		regex: *regexp.MustCompile("-d|--debug"),
+		length: 1,
 	}
 }
 
@@ -55,5 +69,6 @@ func help() *Command {
 		short: "-h",
 		description: "Display this help dialogue and exit",
 		regex: *regexp.MustCompile("-h|--help"),
+		length: 1,
 	}
 }
