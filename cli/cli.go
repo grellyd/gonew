@@ -53,7 +53,7 @@ func usage(commands []*Command) (usageString string) {
 	fmt.Fprintf(&builder, "Usage: %s [options]\n\n", usageCommand)
 	fmt.Fprint(&builder, "Valid options:\n\n")
 	for _, cmd := range commands {
-		fmt.Fprintf(&builder, "%s/%s: %s\n", cmd.short, cmd.long, cmd.description)
+		fmt.Fprintf(&builder, "[ %s | %s ]: %s\n", cmd.short, cmd.long, cmd.description)
 	}
 	return builder.String()
 }
