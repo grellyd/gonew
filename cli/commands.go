@@ -20,7 +20,12 @@ type Command struct {
 	description string
 	regex regexp.Regexp
 	length int
-	present bool
+	value string
+}
+
+// Present checks if a Command is present
+func (c *Command) Present() bool {
+	return c.value != ""
 }
 
 // ValidCommands to this program

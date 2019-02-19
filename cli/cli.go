@@ -15,20 +15,20 @@ func Run() (code int) {
 	args := os.Args[1:]
 	for i := 0; i < len(args); i++ {
 		for _, cmd := range commands {
-			arg := getFullArg(args, i, cmd.length)
+			arg, value := getFullArg(args, i, cmd.length)
 			if cmd.regex.MatchString(arg) {
 				if cmd.short == "-h" {
 					fmt.Println(usage(commands))
 					return code
 				}
-				cmd.present = true
+				cmd.value = value
 			}
 		}
 	}
 	///----
 	fmt.Println("Commands Present")
 	for _, cmd := range commands {
-		fmt.Printf("%s: %v\n", cmd.long, cmd.present)
+		fmt.Printf("%s: %v\n", cmd.long, cmd.Present())
 	}
 	///----
 	err := runPackage(commands)
@@ -38,11 +38,11 @@ func Run() (code int) {
 	return code
 }
 
-func getFullArg(args []string, start int, length int) string {
+func getFullArg(args []string, start int, length int) (string, string) {
 	if length == 1 || len(args) < (start+length) {
-		return args[start]
+		return args[start], "true"
 	}
-	return strings.Join(args[start:start + length], " ")
+	return strings.Join(args[start:start + length], " "), strings.Join(args[start+1:start+length], " ")
 }
 
 // call the main package with the given commands
@@ -73,9 +73,9 @@ func usage(commands []*Command) (usageString string){
 func convertCommands(commands []*Command) (args []string) {
 	args = make([]string, len(commands))
 	for _, cmd := range commands {
-		if cmd.present {
-			args[cmd.order] = "true"
-		}
+		if cmd.Present() {
+			args[cmd.order] = cmd.value
+		} 
 	}
 	return args
 }
