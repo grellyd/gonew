@@ -1,8 +1,8 @@
 package main
 
 import (
-	"os"
 	"github.com/grellyd/goNew/cli"
+	"os"
 )
 
 func main() {

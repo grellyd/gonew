@@ -1,10 +1,10 @@
 package hello
 
 import (
-	"fmt"
-	"strconv"
 	"bufio"
+	"fmt"
 	"os"
+	"strconv"
 	"time"
 )
 
@@ -80,8 +80,6 @@ func interaction(server string) {
 		}
 	}
 }
-
-
 
 func readFromStdin(reader *bufio.Reader) string {
 	in, _ := reader.ReadBytes('\n')

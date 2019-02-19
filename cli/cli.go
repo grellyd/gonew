@@ -1,13 +1,12 @@
 package cli
 
 import (
-	"strings"
 	"fmt"
 	"os"
+	"strings"
 
 	"github.com/grellyd/goNew/hello"
 )
-
 
 // Run the cli
 func Run() (code int) {
@@ -36,7 +35,7 @@ func getFullArg(args []string, start int, length int) (string, string) {
 	if length == 1 || len(args) < (start+length) {
 		return args[start], "true"
 	}
-	return strings.Join(args[start:start + length], " "), strings.Join(args[start+1:start+length], " ")
+	return strings.Join(args[start:start+length], " "), strings.Join(args[start+1:start+length], " ")
 }
 
 // call the main package with the given commands
@@ -46,7 +45,7 @@ func runPackage(commands []*Command) error {
 	return nil
 }
 
-func usage(commands []*Command) (usageString string){
+func usage(commands []*Command) (usageString string) {
 	var builder strings.Builder
 	builder.WriteString(breakLine)
 	builder.WriteString("\n")
@@ -58,7 +57,7 @@ func usage(commands []*Command) (usageString string){
 	builder.WriteString("\n\n")
 	fmt.Fprintf(&builder, "Usage: %s [options]\n\n", usageCommand)
 	fmt.Fprint(&builder, "Valid options:\n\n")
-	for _, cmd := range(commands) {
+	for _, cmd := range commands {
 		fmt.Fprintf(&builder, "%s/%s: %s\n", cmd.short, cmd.long, cmd.description)
 	}
 	return builder.String()
@@ -69,7 +68,7 @@ func convertCommands(commands []*Command) (args []string) {
 	for _, cmd := range commands {
 		if cmd.Present() {
 			args[cmd.order] = cmd.value
-		} 
+		}
 	}
 	return args
 }
