@@ -3,11 +3,8 @@ package hello
 import "fmt"
 
 // Hello says Hi
-func Hello() {
+func Hello(args []string) {
 	fmt.Println("Hello World")
 }
 
-// Config sets up
-func Config() {
-	return
-}
+// TODO: Add interactive and debug functionality

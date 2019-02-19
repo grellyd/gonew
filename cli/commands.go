@@ -5,8 +5,8 @@ import (
 )
 
 // A Command is an application instruction. 
-// Each must either correspond to a parameter in the main program, or act in the cli
 type Command struct {
+	order int
 	long string
 	short string
 	description string
@@ -21,27 +21,34 @@ func ValidCommands() (commands []*Command) {
 
 func interactive() *Command {
 	return &Command{
+		order: 0,
 		long: "--interactive",
 		short: "-i",
 		description: "Run the program in interactive mode",
-		regex: *regexp.MustCompile("( -i )|( --interactive)"),
+		regex: *regexp.MustCompile("-i|--interactive"),
 	}
 }
 
 func debug() *Command {
 	return &Command{
+		order: 1,
 		long: "--debug",
 		short: "-d",
 		description: "Run the program in debug mode, with extra logging",
-		regex: *regexp.MustCompile("( -d )|( --debug )"),
+		regex: *regexp.MustCompile("-d|--debug"),
 	}
 }
 
 func help() *Command {
 	return &Command{
+		// Help is handled by the cli wrapper
+		order: -1,
 		long: "--help",
 		short: "-h",
 		description: "Display this help info",
-		regex: *regexp.MustCompile("( -h )|( --help )"),
+		regex: *regexp.MustCompile("-h|--help"),
 	}
 }
+
+var validCommand = regexp.MustCompile("(alive|read|write ([0-9a-zA-Z ]*)?|help|exit|rounds|(break|kill) (prepare|propose|learn|idle|custom)|continue|step)")
+

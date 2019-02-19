@@ -27,6 +27,12 @@ func Run() (code int) {
 			}
 		}
 	}
+	///----
+	fmt.Println("Commands Present")
+	for _, cmd := range commands {
+		fmt.Printf("%s: %v\n", cmd.long, cmd.present)
+	}
+	///----
 	err := runPackage(commands)
 	if err != nil {
 		code = 1
@@ -36,9 +42,8 @@ func Run() (code int) {
 
 // call the main package with the given commands
 func runPackage(commands []*Command) error {
-	
-	config := hello.Config(commands) 
-	hello.Hello(configuration)
+	args := convertCommands(commands)
+	hello.Hello(args)
 	return nil
 }
 
@@ -50,9 +55,11 @@ func usage(commands []*Command) (usageString string){
 	fmt.Fprintf(&builder, "Usage: %s [options]\n", usageCommand)
 	fmt.Fprint(&builder, "Valid options:\n\n")
 	for _, cmd := range(commands) {
-		fmt.Fprintf(&builder, "%s/%s: %s", cmd.longFlag, cmd.shortFlag, cmd.description)
+		fmt.Fprintf(&builder, "%s/%s: %s", cmd.long, cmd.short, cmd.description)
 	}
 	return builder.String()
 }
 
-
+func convertCommands(commands []*Command) []string {
+	return nil
+}
