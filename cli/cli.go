@@ -25,12 +25,6 @@ func Run() (code int) {
 			}
 		}
 	}
-	///----
-	fmt.Println("Commands Present")
-	for _, cmd := range commands {
-		fmt.Printf("%s: %v\n", cmd.long, cmd.Present())
-	}
-	///----
 	err := runPackage(commands)
 	if err != nil {
 		code = 1
