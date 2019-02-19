@@ -4,6 +4,13 @@ import (
 	"regexp"
 )
 
+const (
+	breakLine = "===================="
+	programName = "goNew"
+	usageCommand = "go run goNew.go"
+
+)
+
 // A Command is an application instruction. 
 type Command struct {
 	order int
@@ -45,10 +52,7 @@ func help() *Command {
 		order: -1,
 		long: "--help",
 		short: "-h",
-		description: "Display this help info",
+		description: "Display this help dialogue and exit",
 		regex: *regexp.MustCompile("-h|--help"),
 	}
 }
-
-var validCommand = regexp.MustCompile("(alive|read|write ([0-9a-zA-Z ]*)?|help|exit|rounds|(break|kill) (prepare|propose|learn|idle|custom)|continue|step)")
-

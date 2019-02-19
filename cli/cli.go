@@ -8,13 +8,6 @@ import (
 	"github.com/grellyd/goNew/hello"
 )
 
-const (
-	breakLine = "====================\n"
-	programName = "goNew"
-	usageCommand = "go run goNew.go"
-
-)
-
 
 // Run the cli
 func Run() (code int) {
@@ -24,6 +17,10 @@ func Run() (code int) {
 		for _, cmd := range commands {
 			if cmd.regex.MatchString(arg) {
 				cmd.present = true
+				if cmd.short == "-h" {
+					fmt.Println(usage(commands))
+					return code
+				}
 			}
 		}
 	}
@@ -50,16 +47,19 @@ func runPackage(commands []*Command) error {
 func usage(commands []*Command) (usageString string){
 	var builder strings.Builder
 	builder.WriteString(breakLine)
+	builder.WriteString("\n")
 	builder.WriteString(programName)
+	builder.WriteString("\n")
 	builder.WriteString(breakLine)
+	builder.WriteString("\n")
 	fmt.Fprintf(&builder, "Usage: %s [options]\n", usageCommand)
 	fmt.Fprint(&builder, "Valid options:\n\n")
 	for _, cmd := range(commands) {
-		fmt.Fprintf(&builder, "%s/%s: %s", cmd.long, cmd.short, cmd.description)
+		fmt.Fprintf(&builder, "%s/%s: %s\n", cmd.long, cmd.short, cmd.description)
 	}
 	return builder.String()
 }
 
-func convertCommands(commands []*Command) []string {
-	return nil
+func convertCommands(commands []*Command) (args []string) {
+	return args
 }
