@@ -24,7 +24,9 @@ func Run() (code int) {
 			}
 		}
 	}
-	err := runPackage(commands)
+	runArgs := convertCommands(commands)
+	// Run the core program
+	err := hello.Hello(runArgs)
 	if err != nil {
 		code = 1
 	}
@@ -36,13 +38,6 @@ func getFullArg(args []string, start int, length int) (string, string) {
 		return args[start], "true"
 	}
 	return strings.Join(args[start:start+length], " "), strings.Join(args[start+1:start+length], " ")
-}
-
-// call the main package with the given commands
-func runPackage(commands []*Command) error {
-	args := convertCommands(commands)
-	err := hello.Hello(args)
-	return err
 }
 
 func usage(commands []*Command) (usageString string) {
