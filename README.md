@@ -21,3 +21,4 @@ Currently only named parameters are supported, not positional parameters.
 - Rename the package from `goNew` to `gonew` per [Effective Go's package naming conventions'](https://golang.org/doc/effective_go.html#package-names) preference for single word non-camelcase.
 - Handle arbitrary length, quotation mark bounded, arguements as an argument length of 2.
 - Handle positional arguments.
+- Dynamic Regexp generation for arguments
