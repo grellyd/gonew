@@ -19,3 +19,5 @@ Currently only named parameters are supported, not positional parameters.
 - Use `CommandCli()` and `Command()` in hello to demonstrate maintaining CLI and library bindings.
 - Add `go run main.go [ options ]` or something similar to the usage command.
 - Rename the package from `goNew` to `gonew` per [Effective Go's package naming conventions'](https://golang.org/doc/effective_go.html#package-names) preference for single word non-camelcase.
+- Handle arbitrary length, quotation mark bounded, arguements as an argument length of 2.
+- Handle positional arguments.
