@@ -11,3 +11,10 @@ When building a new package, in order to get these features, you must register y
 Note that the order given for each command my correspond to the order in which your core program expects the arguments. While this does break the law of demeter, as the cli package has some knowledge of how the core package functions, the cli package cannot act on arbitrary input without some knowledge of what to expect.
 
 Currently only named parameters are supported, not positional parameters.
+
+## TODO
+
+- Specify the go program interface with more detail.
+- Add a full example in the help dialogue and in `cli/command.go`
+- Use `CommandCli()` and `Command()` in hello to demonstrate maintaining CLI and library bindings.
+- Add `go run main.go [ options ]` or something similar to the usage command.
