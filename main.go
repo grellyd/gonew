@@ -3,7 +3,7 @@ package main
 import (
 	"os"
 
-	"github.com/grellyd/goNew/cli"
+	"github.com/grellyd/gonew/cli"
 )
 
 func main() {

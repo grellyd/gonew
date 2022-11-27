@@ -5,7 +5,7 @@ import (
 	"os"
 	"strings"
 
-	"github.com/grellyd/goNew/hello"
+	"github.com/grellyd/gonew/hello"
 )
 
 // Run the cli

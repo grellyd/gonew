@@ -4,7 +4,7 @@ import "regexp"
 
 const (
 	breakLine          = "===================="
-	programName        = "goNew"
+	programName        = "gonew"
 	usageCommand       = "go run main.go"
 	programDescription = "go CLI example Program"
 )
